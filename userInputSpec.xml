@@ -1,0 +1,7 @@
+<userInput>
+	<panel order="0">
+		<field type="dir" align="left" variable="blfolder">
+			<spec txt="Blockland install folder" size="25" set="C:\Blockland"/>
+		</field>
+	</panel>
+</userInput>

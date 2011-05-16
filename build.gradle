@@ -1,0 +1,34 @@
+apply plugin: "java"
+apply plugin: "application"
+apply plugin: blservermanager.build.JarLibs
+
+repositories {
+	mavenCentral()
+	flatDir dirs: "lib"
+}
+
+configurations {
+	izpack
+}
+
+dependencies {
+	izpack "izpack:izpack-standalone-compiler:4.3.3"
+	compile "commons-configuration:commons-configuration:1.6"
+	compile "SwingHelper:SwingHelperTray:390"
+	compile "TooTallNate:WebSocket:f49e9984d877a5b753c6"
+	compile "org.slf4j:slf4j-api:1.6.1"
+	runtime "ch.qos.logback:logback-classic:0.9.28"
+}
+
+mainClassName = "tk.dontcare4free.blservermanager.Main"
+
+jar {
+	manifest {
+		attributes("Main-Class": mainClassName)
+	}
+}
+
+task installer(dependsOn: build) << {
+	ant.taskdef(name: "IzPack", classname: "com.izforge.izpack.ant.IzPackTask", classpath: configurations.izpack.asPath)
+	ant.IzPack(input: "installer.xml", output: "build/distributions/blservermanager-installer.jar", installerType: "standard", basedir: "build/")
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" standalone="yes" ?>
+<installation version="1.0">
+	<info>
+		<appname>Blockland Remote Server Manager</appname>
+		<appversion>1.0</appversion>
+		<authors>
+			<author name="DontCare4Free" email="webmaster@dontcare4free.tk"/>
+		</authors>
+		<javaversion>1.6</javaversion>
+		<run-privileged/>
+		<uninstaller/>
+	</info>
+	<guiprefs width="600" height="480" resizable="no"/>
+	<locale>
+		<langpack iso3="eng"/>
+	</locale>
+	<panels>
+		<panel classname="HelloPanel"/>
+		<panel classname="TargetPanel"/>
+		<panel classname="UserInputPanel" id="userinput"/>
+		<panel classname="InstallPanel"/>
+		<panel classname="SimpleFinishPanel"/>
+	</panels>
+	<packs>
+		<pack name="Core" required="yes">
+			<description>Required</description>
+			<fileset dir="libs" targetdir="$INSTALL_PATH" override="true"/>
+			<file src="../Script_EvalFile.zip" targetdir="$blfolder/Add-Ons"/>
+			<file src="../blservermanager.xml" targetdir="$INSTALL_PATH"/>
+			<parsable targetfile="$INSTALL_PATH/blservermanager.xml" type="xml"/>
+		</pack>
+	</packs>
+	<resources>
+		<res id="userInputSpec.xml" src="../userInputSpec.xml"/>
+	</resources>
+
+	<native type="izpack" name="ShellLink.dll"/>
+	<native name="COIOSHelper.dll" stage="both" type="3rdparty">
+		<os family="windows"/>
+	</native>
+	<listeners>
+		<listener installer="RegistryInstallerListener" uninstaller="RegistryUninstallerListener">
+			<os family="windows"/>
+		</listener>
+	</listeners>
+</installation>
